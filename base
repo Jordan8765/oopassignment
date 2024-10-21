@@ -1,0 +1,13 @@
+import math 
+
+class shape():
+    def __init__(self, color, type):
+        self.color = color
+        self.type = type
+
+    def get_volume():
+        return None
+    
+    def get_surface_area():
+        return None
+    
