@@ -1,0 +1,28 @@
+from base import *
+
+from graphing import *
+
+import math
+#####Sub classe#####
+class Diamond(shape):
+    def __init__(self, color, type, edge_length):
+        super().__init__(color, type)
+        self.edge_length = edge_length
+
+    def volume(self):
+        
+    
+    def surface_area():
+        print("imaaz = sigma")
+    
+class truncated_tetrahedron(shape):
+    def __init__(self, color, type):
+        super().__init__(color, type)
+    
+    def volume():
+        print("skip")
+    
+    def surface_area():
+        print("kjkjk")
+
+    
