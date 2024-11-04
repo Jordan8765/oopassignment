@@ -1,4 +1,10 @@
-import math 
+
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+import numpy as np
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+
+import math
 
 class shape():
     def __init__(self, color, type):
@@ -10,4 +16,77 @@ class shape():
     
     def get_surface_area():
         return None
+    
+    def type_get(self):
+        return self.type
+    
+    def get_color(self):
+        return self.color
+
+
+
+class Diamond(shape):
+    def __init__(self, color, height, edge_length):
+        super().__init__(color, "diamond")
+        self.edge_length = edge_length
+        self.height = height
+
+
+    def volume(self):
+        ar = self.edge_length**2
+        return (1/3) * ar * self.height * 2
+    
+    def surface_area(self):
+        ar = self.edge_length
+        return (ar ** 3 * math.sqrt(2)) / 3
+    
+    def draw(self):
+        vertices = np.array ([
+            [0, 0, 1],    
+            [0, 1, 2],  
+            [0, 2, 3],   
+            [-2, -2, -3],    
+            [-1, -1, -2],   
+            [0, 0, -1]
+        ])
+        faces = [
+        [vertices[0], vertices[1], vertices[2]],    
+        [vertices[0], vertices[2], vertices[3]],  
+        [vertices[0], vertices[3], vertices[4]], 
+        [vertices[0], vertices[4], vertices[1]],  
+        [vertices[1], vertices[2], vertices[5]],  
+        [vertices[2], vertices[3], vertices[5]],  
+        [vertices[3], vertices[4], vertices[5]],  
+        [vertices[4], vertices[1], vertices[5]],  
+        ]
+        
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+    
+        diamond = Poly3DCollection(faces, linewidths=1, edgecolors='k', alpha=.25)
+
+        
+        ax.add_collection3d(diamond)
+
+
+        ax.set_xlabel('X')
+        ax.set_ylabel('Y')
+        ax.set_zlabel('Z')
+        ax.set_xlim([-2, 2])
+        ax.set_ylim([-2, 2])
+        ax.set_zlim([-2, 2])
+
+    plt.show()
+
+
+class truncated_tetrahedron(shape):
+    def __init__(self, color, type):
+        super().__init__(color, type)
+    
+    def volume():
+        print("skip")
+    
+    def surface_area():
+        print("kjkjk")
     
