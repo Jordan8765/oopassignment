@@ -2,7 +2,7 @@ from numpy import linspace
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits import mplot3d
- 
+from base import Diamond
  
 # Creating 3D figure
 fig = plt.figure(figsize=(8, 8))
