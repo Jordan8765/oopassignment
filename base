@@ -37,17 +37,19 @@ class Diamond(shape):
         return (1/3) * ar * self.height * 2
     
     def surface_area(self):
-        ar = self.edge_length
-        return (ar ** 3 * math.sqrt(2)) / 3
+        ar = math.sqrt((self.edge_length / 2) ** 2 + self.height ** 2)
+        return (2 * self.edge_length * ar + self.edge_length ** 2)
     
     def draw(self):
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
         vertices = np.array ([
-            [0, 0, 1],    
-            [0, 1, 2],  
-            [0, 2, 3],   
-            [-2, -2, -3],    
-            [-1, -1, -2],   
-            [0, 0, -1]
+            [0, 0, self.height],    
+            [-self.edge_length/2, -self.edge_length/2, 0],  
+            [self.edge_length/2, -self.edge_length/2, 0],   
+            [self.edge_length/2, self.edge_length/2, 0],    
+            [-self.edge_length/2, self.edge_length/2, 0],   
+            [0, 0, -self.height]
         ])
         faces = [
         [vertices[0], vertices[1], vertices[2]],    
@@ -57,27 +59,10 @@ class Diamond(shape):
         [vertices[1], vertices[2], vertices[5]],  
         [vertices[2], vertices[3], vertices[5]],  
         [vertices[3], vertices[4], vertices[5]],  
-        [vertices[4], vertices[1], vertices[5]],  
-        ]
-        
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
+        [vertices[4], vertices[1], vertices[5]]]
 
-    
-        diamond = Poly3DCollection(faces, linewidths=1, edgecolors='k', alpha=.25)
-
-        
-        ax.add_collection3d(diamond)
-
-
-        ax.set_xlabel('X')
-        ax.set_ylabel('Y')
-        ax.set_zlabel('Z')
-        ax.set_xlim([-2, 2])
-        ax.set_ylim([-2, 2])
-        ax.set_zlim([-2, 2])
-
-    plt.show()
+        ax.add_collection3d(Poly3DCollection(faces, facecolors=self.get_colour(), linewidths=1, edgecolors='r', alpha=.25))
+        plt.show()
 
 
 class truncated_tetrahedron(shape):
@@ -89,4 +74,4 @@ class truncated_tetrahedron(shape):
     
     def surface_area():
         print("kjkjk")
-    
+
