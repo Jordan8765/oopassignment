@@ -11,11 +11,14 @@ class shape():
         self.color = color
         self.type = type
 
-    def get_volume():
+    def get_volume(self):
         return None
     
-    def get_surface_area():
+    def get_surface_area(self):
         return None
+
+    def draw(self):
+        pass
     
     def type_get(self):
         return self.type
@@ -33,8 +36,8 @@ class Diamond(shape):
 
 
     def volume(self):
-        ar = self.edge_length**2
-        return (1/3) * ar * self.height * 2
+        vol = self.edge_length**2
+        return (1/3) * vol * self.height * 2
     
     def surface_area(self):
         ar = math.sqrt((self.edge_length / 2) ** 2 + self.height ** 2)
@@ -43,8 +46,7 @@ class Diamond(shape):
     def draw(self):
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
-        vertices = np.array ([
-            [0, 0, self.height],    
+        vertices = np.array ([[0, 0, self.height],    
             [-self.edge_length/2, -self.edge_length/2, 0],  
             [self.edge_length/2, -self.edge_length/2, 0],   
             [self.edge_length/2, self.edge_length/2, 0],    
@@ -65,13 +67,22 @@ class Diamond(shape):
         plt.show()
 
 
-class truncated_tetrahedron(shape):
-    def __init__(self, color, type):
-        super().__init__(color, type)
-    
-    def volume():
-        print("skip")
-    
-    def surface_area():
-        print("kjkjk")
+class cylinder(shape):
+    def __init__(self, color, height, radius):
+        super().__init__(color, "Cylinder")
+        self.height = height
+        self.radius = radius
 
+    def volume(self):
+        vol = math.pi*pow(self.radius,2)*self.height
+        return vol
+    
+    def surface_area(self):
+        ar = (2 * math.pi * self.radius * self.height) + (2 * math.pi * pow(self.radius,2))
+        return ar
+
+    def draw(self):
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+
+        
