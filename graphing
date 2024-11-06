@@ -21,3 +21,75 @@ for angle in range(0, 360):
     plt.pause(.001)
  
 plt.show()
+
+import tkinter as tk
+from tkinter import messagebox
+from base import Sphere, Diamond
+
+class ShapeVisualizer:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("3D Shape Visualizer")
+
+        self.shape_label = tk.Label(root, text="Please Select A Shape:")
+        self.shape_label.pack()
+        self.shape_var = tk.StringVar(value="Cylinder")
+        self.shape_menu = tk.OptionMenu(root, self.shape_var, "Cylinder", "diamond")
+        self.shape_menu.pack()
+
+        self.radius_label = tk.Label(root, text="Radius (for Cylinder):")
+        self.radius_label.pack()
+        self.radius_entry = tk.Entry(root)
+        self.radius_entry.pack()
+
+        self.cylinder_height_label = tk.Label(root, text="Height (for Cylinder):")
+        self.cylinder_height_label.pack()
+        self.cylinder_height_entry = tk.Entry(root)
+        self.cylinder_height_entry.pack()
+
+        self.edge_length_label = tk.Label(root, text="Edge Length (for Diamond):")
+        self.edge_length_label.pack()
+        self.edge_length_entry = tk.Entry(root)
+        self.edge_length_entry.pack()
+
+        self.height_label = tk.Label(root, text="Height (for Diamond):")
+        self.height_label.pack()
+        self.height_entry = tk.Entry(root)
+        self.height_entry.pack()
+
+        self.colour_label = tk.Label(root, text="Colour:")
+        self.colour_label.pack()
+        self.colour_entry = tk.Entry(root)
+        self.colour_entry.pack()
+
+        self.generate_button = tk.Button(root, text="Visualize Shape", command=self.generate_shape)
+        self.generate_button.pack()
+
+    def Visualize_shape(self):
+        try:
+            shape_type = self.shape_var.get()
+            colour = self.colour_entry.get() or 'blue'
+
+            if shape_type == "Cylinder":
+                radius = float(self.radius_entry.get())
+                height = float(self.cylinder_height_entry.get())
+                shape = Cylinder(radius, height, colour)
+            elif shape_type == "Diamond":
+                base_length = float(self.edge_length_entry.get())
+                height = float(self.height_entry.get())
+                shape = Diamond(edge_length, height, colour)
+            else:
+                raise ValueError("Type of shape not supported")
+
+            volume = shape.get_volume()
+            surface_area = shape.get_surface_area()
+            messagebox.showinfo("Shape Info", f"Volume: {volume:.2f}\nSurface Area: {surface_area:.2f}")
+            shape.draw()
+
+        except ValueError as e:
+            messagebox.showerror("Error", f"Invalid input: {e}")
+
+if __name__ == "__graphing__":
+    root = tk.Tk()
+    app = ShapeVizualizer(root)
+    root.mainloop()
