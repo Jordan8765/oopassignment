@@ -85,4 +85,7 @@ class cylinder(shape):
         fig = plt.figure()
         ax = fig.add_subplot(111, projection='3d')
 
+        ax.add_collection3d(Poly3DCollection(faces, facecolors=self.get_colour(), linewidths=1, edgecolors='r', alpha=.25))
+        plt.show()
+
         
